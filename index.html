@@ -701,7 +701,7 @@
             </div>
 
             <div class="sketch-box p-3 bg-yellow-50 border-dashed mb-6 text-center text-sm font-bold text-gray-600 flex items-center justify-center gap-2">
-                <span>💡 請用日幣價格輸入</span>
+                <span>💡 可用台幣/日幣價格輸入</span>
                 <svg width="24" height="24" viewBox="0 0 50 50" overflow="visible">
                     <!-- Head -->
                     <circle cx="25" cy="10" r="5" fill="none" stroke="#4b5563" stroke-width="2"/>
@@ -831,14 +831,26 @@
                 // List Items
                 if (expensesData[cat.id]) {
                     expensesData[cat.id].forEach((item, index) => {
-                        const price = parseInt(item.price) || 0;
-                        catTotal += price;
-                        totalJPY += price;
+                        let displayPrice = "";
+                        let itemJPYValue = 0;
+
+                        if (item.currency === 'TWD') {
+                            displayPrice = `NT$ ${item.price}`;
+                            itemJPYValue = item.price / exchangeRate;
+                        } else {
+                            // Default JPY
+                            displayPrice = `¥ ${item.price}`;
+                            itemJPYValue = parseInt(item.price) || 0;
+                        }
+
+                        catTotal += itemJPYValue;
+                        totalJPY += itemJPYValue;
+
                         html += `
                             <div class="expense-row">
                                 <span class="font-bold text-gray-700">${item.desc}</span>
                                 <div class="flex items-center">
-                                    <span class="font-black mr-2">¥${item.price}</span>
+                                    <span class="font-black mr-2">${displayPrice}</span>
                                     <i class="fas fa-trash-alt delete-btn" onclick="deleteExpense('${cat.id}', ${index})"></i>
                                 </div>
                             </div>
@@ -851,10 +863,16 @@
 
                 // Add Form
                 html += `
-                    <div class="flex gap-2 mt-2">
-                        <input type="text" id="desc-${cat.id}" placeholder="品項" class="sketch-input w-2/3 p-2 text-sm bg-white">
-                        <input type="number" id="price-${cat.id}" placeholder="¥" class="sketch-input w-1/3 p-2 text-sm bg-white font-bold">
-                        <button onclick="addExpense('${cat.id}')" class="bg-black text-white rounded-lg px-3 hover:bg-gray-800 transition">
+                    <div class="flex gap-2 mt-2 items-center">
+                        <input type="text" id="desc-${cat.id}" placeholder="品項" class="sketch-input flex-1 min-w-0 p-2 text-sm bg-white">
+                        <div class="flex gap-1 items-center w-36 flex-shrink-0">
+                            <select id="curr-${cat.id}" class="sketch-input w-16 p-1 text-xs bg-white font-bold h-full border-2 border-black rounded-lg">
+                                <option value="JPY">¥</option>
+                                <option value="TWD">NT$</option>
+                            </select>
+                            <input type="number" id="price-${cat.id}" placeholder="0" class="sketch-input flex-1 p-2 text-sm bg-white font-bold min-w-0">
+                        </div>
+                        <button onclick="addExpense('${cat.id}')" class="bg-black text-white rounded-lg w-8 h-9 flex items-center justify-center hover:bg-gray-800 transition flex-shrink-0">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -913,19 +931,22 @@
             }
 
             // Update Totals
-            document.getElementById('total-jpy').textContent = totalJPY.toLocaleString();
+            document.getElementById('total-jpy').textContent = Math.round(totalJPY).toLocaleString();
             document.getElementById('total-twd').textContent = Math.round(totalJPY * exchangeRate).toLocaleString();
         }
 
         function addExpense(catId) {
             const descInput = document.getElementById(`desc-${catId}`);
             const priceInput = document.getElementById(`price-${catId}`);
+            const currInput = document.getElementById(`curr-${catId}`);
+            
             const desc = descInput.value.trim();
             const price = parseInt(priceInput.value);
+            const currency = currInput.value;
 
             if (desc && price) {
                 if (!expensesData[catId]) expensesData[catId] = [];
-                expensesData[catId].push({ desc, price });
+                expensesData[catId].push({ desc, price, currency });
                 saveAndRender();
             }
         }
