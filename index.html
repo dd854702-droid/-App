@@ -123,15 +123,16 @@
         [data-theme="dark"] .bg-amber-50 { background-color: #451a03; color: #fef3c7; }
         [data-theme="dark"] .bg-purple-100 { background-color: #4c1d95; color: #e9d5ff; }
         [data-theme="dark"] .bg-orange-100 { background-color: #7c2d12; color: #ffedd5; }
+        [data-theme="dark"] .bg-orange-50 { background-color: #431407; color: #ffedd5; }
         [data-theme="dark"] .bg-blue-100 { background-color: #1e3a8a; color: #bfdbfe; }
         [data-theme="dark"] .bg-gray-700 { background-color: #3f3f46; }
-        [data-theme="dark"] .text-gray-500, [data-theme="dark"] .text-gray-600 { color: #a1a1aa; }
+        [data-theme="dark"] .text-gray-500, [data-theme="dark"] .text-gray-600, [data-theme="dark"] .text-gray-700, [data-theme="dark"] .text-gray-800 { color: #a1a1aa; }
         [data-theme="dark"] .text-gray-400 { color: #71717a; }
         [data-theme="dark"] .text-blue-800, [data-theme="dark"] .text-blue-600 { color: #bfdbfe; }
         [data-theme="dark"] .text-red-600, [data-theme="dark"] .text-red-500 { color: #fca5a5; }
         [data-theme="dark"] .text-amber-800 { color: #fcd34d; }
         [data-theme="dark"] .text-amber-600 { color: #fbbf24; }
-        [data-theme="dark"] .border-gray-300 { border-color: #52525b; }
+        [data-theme="dark"] .border-gray-300, [data-theme="dark"] .border-gray-200, [data-theme="dark"] .border-orange-200, [data-theme="dark"] .border-yellow-200, [data-theme="dark"] .border-red-200 { border-color: #52525b; }
         [data-theme="dark"] .bg-gray-800 { background-color: #18181b; border-color: #52525b; }
 
         /* Navigation */
@@ -255,7 +256,7 @@
                     <span>名古屋</span>
                     <span class="text-xs bg-black text-white px-2 py-1 rounded rotate-3 inline-block">2026</span>
                 </h1>
-                <p id="smart-status" class="text-[10px] font-bold text-blue-500 mt-0.5 animate-pulse">準備出發！</p>
+                <p id="smart-status" class="text-[10px] font-bold text-blue-500 mt-0.5 animate-pulse">連線中...</p>
             </div>
             <div class="flex gap-3">
                 <div id="page-title-icon" class="w-10 h-10 border-2 border-black rounded-full flex items-center justify-center bg-yellow-400 text-black shadow-[2px_2px_0_0_#000]">
@@ -338,30 +339,175 @@
 
             <!-- Day Content Container -->
             <div id="day-content">
-                <!-- Content will be populated by JS -->
+                <div class="text-center py-10 text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-2xl mb-2"></i>
+                    <p class="text-xs">正在同步即時行程...</p>
+                </div>
             </div>
         </div>
 
         <!-- ================= PAGE: GUIDE ================= -->
         <div id="page-guide" class="page-content">
             <h2 class="text-2xl font-black mb-4">深度導覽 Guide</h2>
+            
+            <!-- Navigation Tags -->
+            <div class="flex gap-2 overflow-x-auto pb-2 mb-4 hide-scrollbar">
+                <span class="bg-black text-white text-xs px-3 py-1 rounded-full whitespace-nowrap font-bold shadow-sm">全部</span>
+                <span class="bg-white border-2 border-black text-xs px-3 py-1 rounded-full whitespace-nowrap text-black font-bold">🏯 景點</span>
+                <span class="bg-white border-2 border-black text-xs px-3 py-1 rounded-full whitespace-nowrap text-black font-bold">🍱 美食</span>
+                <span class="bg-white border-2 border-black text-xs px-3 py-1 rounded-full whitespace-nowrap text-black font-bold">🛍️ 購物</span>
+            </div>
+
             <div class="space-y-6">
-                <article class="sketch-card p-4">
-                    <div class="h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
-                        <div class="text-4xl">🐋</div>
-                        <span class="absolute bottom-2 left-3 text-white font-bold drop-shadow-md">名古屋城</span>
+                
+                <!-- Sightseeing Section -->
+                <h3 class="font-bold text-lg border-b-2 border-dashed border-gray-300 pb-1 mb-3 mt-2">🏯 必訪景點</h3>
+
+                <!-- Inuyama Castle -->
+                <article class="sketch-card p-0 overflow-hidden group border-2 border-black">
+                    <div class="h-40 bg-pink-100 relative flex items-center justify-center overflow-hidden">
+                        <div class="text-8xl transition-transform group-hover:scale-110 duration-500 transform">🏯</div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 pt-10">
+                            <h3 class="text-white font-black text-xl drop-shadow-md">犬山城 (Inuyama)</h3>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded text-[10px] font-bold border border-black text-black">國寶五城</div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">尾張德川家的居城</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed mb-3">日本三名城之一，最大特色是天守閣屋頂上的兩隻金光閃閃的「金鯱」。</p>
-                </article>
-                <article class="sketch-card p-4">
-                    <div class="h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
-                        <div class="text-4xl">🏯</div>
-                        <span class="absolute bottom-2 left-3 text-white font-bold drop-shadow-md">犬山城</span>
+                    <div class="p-4 bg-white">
+                        <p class="text-xs text-gray-500 mb-2 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500"></i>愛知縣犬山市</p>
+                        <p class="text-sm text-gray-800 leading-relaxed mb-3">
+                            日本現存最古老的木造天守閣，位在木曾川畔的小山丘上。爬上陡峭的樓梯後，絕景一覽無遺。
+                        </p>
+                        <div class="bg-gray-100 p-2 rounded text-xs text-gray-600 mb-3 border-l-4 border-pink-400">
+                            <strong>💡 Tips:</strong> 城下町有著名的「愛心繪馬」三光稻荷神社，求姻緣超靈驗！還有必吃「醬油烤糰子」。
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="block text-center bg-black text-white text-xs font-bold py-2 rounded hover:bg-gray-800 transition">
+                            在 Google Maps 查看
+                        </a>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">現存最古老天守</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed mb-3">別名「白帝城」，位在木曾川畔的小山丘上，是日本國寶五城之一。</p>
                 </article>
+
+                <!-- Nagoya Castle -->
+                <article class="sketch-card p-0 overflow-hidden group border-2 border-black">
+                    <div class="h-40 bg-green-100 relative flex items-center justify-center overflow-hidden">
+                        <div class="text-8xl transition-transform group-hover:scale-110 duration-500 transform">🐋</div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 pt-10">
+                            <h3 class="text-white font-black text-xl drop-shadow-md">名古屋城 (Nagoya Castle)</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-xs text-gray-500 mb-2 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500"></i>名古屋市中區</p>
+                        <p class="text-sm text-gray-800 leading-relaxed mb-3">
+                            德川家康下令建造，屋頂上的「金鯱」是名古屋的象徵。絕對不能錯過金碧輝煌的「本丸御殿」。
+                        </p>
+                        <div class="bg-gray-100 p-2 rounded text-xs text-gray-600 mb-3 border-l-4 border-green-500">
+                            <strong>💡 Tips:</strong> 週末經常有「名古屋款待武將隊」的表演，非常熱血帥氣！
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Castle" target="_blank" class="block text-center bg-black text-white text-xs font-bold py-2 rounded hover:bg-gray-800 transition">
+                            在 Google Maps 查看
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Oasis 21 -->
+                <article class="sketch-card p-0 overflow-hidden group border-2 border-black">
+                    <div class="h-40 bg-blue-100 relative flex items-center justify-center overflow-hidden">
+                        <div class="text-8xl transition-transform group-hover:scale-110 duration-500 transform">🛸</div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 pt-10">
+                            <h3 class="text-white font-black text-xl drop-shadow-md">綠洲21 (Oasis 21)</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-xs text-gray-500 mb-2 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500"></i>榮 (Sakae)</p>
+                        <p class="text-sm text-gray-800 leading-relaxed mb-3">
+                            外觀像宇宙飛船的立體公園「水的宇宙船」。晚上點燈後非常浪漫，可以走在玻璃屋頂上散步。
+                        </p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Oasis+21+Nagoya" target="_blank" class="block text-center bg-black text-white text-xs font-bold py-2 rounded hover:bg-gray-800 transition">
+                            在 Google Maps 查看
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Food Section -->
+                <h3 class="font-bold text-lg border-b-2 border-dashed border-gray-300 pb-1 mb-3 mt-8">🍱 名古屋必吃美食</h3>
+
+                <!-- Hitsumabushi -->
+                <article class="sketch-card p-4 bg-orange-50 border-2 border-black relative">
+                    <div class="absolute top-2 right-2 text-2xl opacity-10 rotate-12">🍱</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-black text-2xl shadow-[2px_2px_0_0_rgba(0,0,0,1)]">🥢</div>
+                        <h3 class="font-bold text-lg text-black">鰻魚飯三吃</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3 font-medium">
+                        名古屋最奢華的美食體驗。將切碎的蒲燒鰻魚鋪在飯上，獨創的「三種吃法」讓人回味無窮。
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border-2 border-black text-xs space-y-2 shadow-sm">
+                        <div class="flex gap-2 items-start"><span class="bg-black text-white w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-[10px]">1</span><span class="text-gray-800"><strong>原味：</strong>直接品嚐炭烤香氣與醬汁美味。</span></div>
+                        <div class="flex gap-2 items-start"><span class="bg-black text-white w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-[10px]">2</span><span class="text-gray-800"><strong>佐料：</strong>加入蔥花、芥末、海苔，口感層次豐富。</span></div>
+                        <div class="flex gap-2 items-start"><span class="bg-black text-white w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-[10px]">3</span><span class="text-gray-800"><strong>茶泡飯：</strong>淋上高湯，清爽解膩的完美句點。</span></div>
+                    </div>
+                    <div class="mt-3 flex gap-2 overflow-x-auto">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Atsuta+Houraiken" target="_blank" class="text-[10px] bg-white border border-black px-2 py-1 rounded hover:bg-gray-100 whitespace-nowrap text-black font-bold">📍 熱田蓬萊軒</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Hitsumabushi+Ino" target="_blank" class="text-[10px] bg-white border border-black px-2 py-1 rounded hover:bg-gray-100 whitespace-nowrap text-black font-bold">📍 備長</a>
+                    </div>
+                </article>
+
+                <!-- Morning Service -->
+                <article class="sketch-card p-4 bg-yellow-50 border-2 border-black relative">
+                    <div class="absolute top-2 right-2 text-2xl opacity-10 rotate-12">🍞</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-black text-2xl shadow-[2px_2px_0_0_rgba(0,0,0,1)]">☕</div>
+                        <h3 class="font-bold text-lg text-black">Morning Service</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3 font-medium">
+                        名古屋特有的「買飲料送早餐」文化。通常在早上 11:00 前，只要點一杯咖啡，店家就會免費附贈吐司和水煮蛋（或紅豆泥）。
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border-2 border-black text-xs text-gray-800 shadow-sm">
+                        <strong class="block mb-2 border-b border-gray-200 pb-1">💡 推薦名店：</strong>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><b>Komeda's Coffee</b>：全日本連鎖，但發源地一定要朝聖。</li>
+                            <li><b>Bucyo Coffee</b>：小倉紅豆吐司超有名 (Day 2 行程)。</li>
+                            <li><b>Konparu</b>：昭和復古風，炸蝦三明治是一絕。</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Solo Pizza -->
+                <article class="sketch-card p-4 bg-red-50 border-2 border-black">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-black text-2xl shadow-[2px_2px_0_0_rgba(0,0,0,1)]">🍕</div>
+                        <h3 class="font-bold text-lg text-black">世界冠軍披薩</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3 font-medium">
+                        位於大須的 <b>Solo Pizza Napoletana</b>。主廚牧島昭成曾在拿坡里披薩世界大賽奪冠。價格親民，是排隊名店。
+                    </p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-xs bg-white border border-black px-2 py-1 rounded font-bold text-black shadow-[1px_1px_0_0_#000]">Day 2 晚餐</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Solo+Pizza+Napoletana+Osu" target="_blank" class="text-xs font-bold underline text-black">開啟地圖 ></a>
+                    </div>
+                </article>
+
+                <!-- Shopping Section -->
+                <h3 class="font-bold text-lg border-b-2 border-dashed border-gray-300 pb-1 mb-3 mt-8">🛍️ 逛街聖地</h3>
+
+                <article class="sketch-card p-4 border-2 border-black bg-purple-50">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-lg text-black">大須商店街 (Osu)</h3>
+                            <p class="text-xs text-gray-500 mb-2 font-bold">好逛好買的混沌迷宮</p>
+                        </div>
+                        <div class="text-4xl">🏮</div>
+                    </div>
+                    <p class="text-sm text-gray-800 leading-relaxed mb-3">
+                        結合了秋葉原的電器動漫、原宿的潮流古著、以及淺草的傳統寺廟。這裡有超過1200家店舖，是挖寶和邊走邊吃的天堂。
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-[10px]">
+                        <span class="bg-white px-2 py-1 rounded border border-black text-black">#古著</span>
+                        <span class="bg-white px-2 py-1 rounded border border-black text-black">#女僕咖啡</span>
+                        <span class="bg-white px-2 py-1 rounded border border-black text-black">#炸雞</span>
+                        <span class="bg-white px-2 py-1 rounded border border-black text-black">#Alice on Wednesday</span>
+                    </div>
+                </article>
+
             </div>
         </div>
 
@@ -496,9 +642,9 @@
 
             <!-- Data Management -->
             <div class="sketch-card p-4 mb-6 bg-gray-50">
-                <h3 class="font-bold mb-3 text-sm text-gray-700"><i class="fas fa-database mr-2"></i>行程資料管理</h3>
+                <h3 class="font-bold mb-3 text-sm text-gray-700"><i class="fas fa-database mr-2"></i>資料管理</h3>
                 <div class="flex gap-2 mb-3">
-                    <button onclick="resetItinerary()" class="w-full bg-red-100 border border-red-500 rounded p-2 text-xs font-bold hover:bg-red-200 text-red-800">⚠️ 重置為預設行程</button>
+                    <button onclick="resetItinerary()" class="w-full bg-red-100 border border-red-500 rounded p-2 text-xs font-bold hover:bg-red-200 text-red-800">⚠️ 重置公共行程</button>
                 </div>
                 <div class="flex gap-2 mb-3">
                     <button onclick="downloadBackup()" class="flex-1 bg-white border border-black rounded p-2 text-xs font-bold hover:bg-gray-100 text-black">📥 下載備份檔</button>
@@ -614,6 +760,7 @@
         </nav>
     </div>
 
+    <!-- UI Scripts -->
     <script>
         // ================= DATA & STATE =================
         let exchangeRate = 0.215;
@@ -621,7 +768,19 @@
         let itineraryData = {};
         let editingItemIndex = -1; // Track which item is being edited
 
-        // Default Itinerary Data (Reference)
+        const expenseCategories = [
+            { id: 'food', name: '飲食', icon: 'fa-utensils', color: 'bg-orange-50', chartColor: '#fdba74' },
+            { id: 'shopping', name: '購物', icon: 'fa-shopping-bag', color: 'bg-pink-50', chartColor: '#f9a8d4' },
+            { id: 'transport', name: '交通', icon: 'fa-train', color: 'bg-blue-50', chartColor: '#93c5fd' },
+            { id: 'accommodation', name: '住宿', icon: 'fa-bed', color: 'bg-purple-50', chartColor: '#d8b4fe' },
+            { id: 'other', name: '其他', icon: 'fa-ellipsis-h', color: 'bg-gray-100', chartColor: '#d1d5db' }
+        ];
+        
+        const defaultChecklist = [
+            { text: "護照", checked: false }, { text: "網卡 / Roaming", checked: false }, { text: "日幣現金", checked: false }, { text: "行動電源", checked: false }
+        ];
+
+        // Default Itinerary Data (For Reset or First Load if DB is empty)
         const defaultItineraryData = {
             day1: {
                 title: "市區美食巡禮",
@@ -650,7 +809,7 @@
                     { type: 'transport', desc: '🚃 移動約 20分' },
                     { type: 'spot', time: '08:00', title: 'Bucyo Coffee', desc: '小倉紅豆吐司', mapQuery: 'Bucyo Coffee KAKO', category: 'food' },
                     { type: 'transport', desc: '🚃 移動約 45分' },
-                    { type: 'spot', time: '10:00', title: '犬山城', desc: '國寶天守閣 (門票: ¥500)', mapQuery: 'Inuyama Castle', category: 'spot' },
+                    { type: 'spot', time: '10:00', title: '犬山城', desc: '國寶天守閣 (門票: ¥550)', mapQuery: 'Inuyama Castle', category: 'spot' },
                     { type: 'transport', desc: '🚶 散步' },
                     { type: 'spot', time: '12:30', title: 'Sakura Chaya', desc: '田樂烤豆腐串', mapQuery: 'Sakura Chaya Inuyama', category: 'food' },
                     { type: 'transport', desc: '🚃 13:30 出發 (車程約1.5hr)' },
@@ -681,24 +840,11 @@
             }
         };
 
-        const expenseCategories = [
-            { id: 'food', name: '飲食', icon: 'fa-utensils', color: 'bg-orange-50', chartColor: '#fdba74' },
-            { id: 'shopping', name: '購物', icon: 'fa-shopping-bag', color: 'bg-pink-50', chartColor: '#f9a8d4' },
-            { id: 'transport', name: '交通', icon: 'fa-train', color: 'bg-blue-50', chartColor: '#93c5fd' },
-            { id: 'accommodation', name: '住宿', icon: 'fa-bed', color: 'bg-purple-50', chartColor: '#d8b4fe' },
-            { id: 'other', name: '其他', icon: 'fa-ellipsis-h', color: 'bg-gray-100', chartColor: '#d1d5db' }
-        ];
-        
-        const defaultChecklist = [
-            { text: "護照", checked: false }, { text: "網卡 / Roaming", checked: false }, { text: "日幣現金", checked: false }, { text: "行動電源", checked: false }
-        ];
-
-        // ================= MAIN LOGIC =================
+        // ================= UI LOGIC =================
         window.onload = function() {
             if (localStorage.getItem('theme') === 'dark') toggleTheme(false);
             
-            // Init Itinerary Data
-            initItineraryData();
+            // Note: Itinerary init is now handled by Firebase script at bottom
             
             switchDay('day1');
             renderExpenses();
@@ -721,25 +867,6 @@
                 }
             });
         };
-
-        function initItineraryData() {
-            const stored = localStorage.getItem('nagoya_itinerary_data');
-            if (stored) {
-                itineraryData = JSON.parse(stored);
-            } else {
-                itineraryData = JSON.parse(JSON.stringify(defaultItineraryData)); // Deep copy
-                localStorage.setItem('nagoya_itinerary_data', JSON.stringify(itineraryData));
-            }
-        }
-
-        function resetItinerary() {
-            if(confirm("確定要重置所有行程嗎？這將會清除您新增或修改的行程點。")) {
-                itineraryData = JSON.parse(JSON.stringify(defaultItineraryData));
-                localStorage.setItem('nagoya_itinerary_data', JSON.stringify(itineraryData));
-                switchDay(currentDayId);
-                alert("已重置為預設行程。");
-            }
-        }
 
         // Theme Toggle
         function toggleTheme(save = true) {
@@ -780,6 +907,13 @@
 
         function renderItinerary(dayId) {
             const contentDiv = document.getElementById('day-content');
+            
+            // Check if data is loaded
+            if (!itineraryData || Object.keys(itineraryData).length === 0) {
+                // Keep loading spinner if empty
+                return; 
+            }
+
             const data = itineraryData[dayId];
             if (!data) return;
 
@@ -791,8 +925,8 @@
                 const itemId = `card-${dayId}-${index}`;
                 if (item.type === 'transport') {
                     html += `<div class="relative flex items-center mb-6 group">
-                        <div class="timeline-travel cursor-pointer hover:bg-gray-100" onclick="editItem('${dayId}', ${index})">${item.desc}</div>
-                        <button onclick="deleteItineraryItem('${dayId}', ${index})" class="ml-2 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition"><i class="fas fa-trash-alt"></i></button>
+                        <div class="timeline-travel cursor-pointer hover:bg-gray-100" onclick="window.editItem('${dayId}', ${index})">${item.desc}</div>
+                        <button onclick="window.deleteItineraryItem('${dayId}', ${index})" class="ml-2 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition"><i class="fas fa-trash-alt"></i></button>
                     </div>`;
                 } else {
                     // Category Styles
@@ -813,8 +947,8 @@
                         <div class="${iconBg} border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><span class="font-bold text-xs">${item.time ? item.time.replace(':', '') : ''}</span></div>
                         <div class="${cardBg} p-3 flex-1 relative">
                             <div class="absolute top-2 right-2 flex gap-2">
-                                <span class="text-gray-300 cursor-pointer hover:text-black" onclick="editItem('${dayId}', ${index})"><i class="fas fa-edit"></i></span>
-                                <span class="text-gray-300 cursor-pointer hover:text-red-500 opacity-0 group-hover:opacity-100 transition" onclick="deleteItineraryItem('${dayId}', ${index})"><i class="fas fa-trash-alt"></i></span>
+                                <span class="text-gray-300 cursor-pointer hover:text-black" onclick="window.editItem('${dayId}', ${index})"><i class="fas fa-edit"></i></span>
+                                <span class="text-gray-300 cursor-pointer hover:text-red-500 opacity-0 group-hover:opacity-100 transition" onclick="window.deleteItineraryItem('${dayId}', ${index})"><i class="fas fa-trash-alt"></i></span>
                             </div>
                             <span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>${item.time}</span>
                             <h4 class="font-bold">${item.title}</h4>
@@ -828,7 +962,7 @@
 
             // Add Item Button
             html += `<div class="relative flex items-center mb-6 pl-11">
-                <button onclick="openAddItemModal('${dayId}')" class="text-xs bg-black text-white px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-800 transition"><i class="fas fa-plus mr-1"></i>新增行程</button>
+                <button onclick="window.openAddItemModal('${dayId}')" class="text-xs bg-black text-white px-3 py-2 rounded-lg font-bold shadow hover:bg-gray-800 transition"><i class="fas fa-plus mr-1"></i>新增行程</button>
             </div>`;
 
             // Map Section (Static Reference)
@@ -838,131 +972,6 @@
             </div></div></div>`;
 
             contentDiv.innerHTML = html;
-        }
-
-        // Add/Delete/Edit Itinerary Functions
-        function deleteItineraryItem(dayId, index) {
-            if(confirm('確定要刪除此行程嗎？')) {
-                itineraryData[dayId].items.splice(index, 1);
-                localStorage.setItem('nagoya_itinerary_data', JSON.stringify(itineraryData));
-                renderItinerary(dayId);
-            }
-        }
-
-        function openAddItemModal(dayId) {
-            editingItemIndex = -1; // Reset to Add Mode
-            document.getElementById('modal-title').textContent = "新增行程";
-            document.getElementById('btn-save-item').textContent = "新增";
-            
-            document.getElementById('new-item-type').value = 'spot';
-            document.getElementById('new-item-time').value = '';
-            document.getElementById('new-item-title').value = '';
-            document.getElementById('new-item-desc').value = '';
-            document.getElementById('new-item-query').value = '';
-            document.getElementById('new-item-note').value = '';
-            document.getElementById('new-item-trans-desc').value = '';
-            
-            document.getElementById('new-item-fields').classList.remove('hidden');
-            document.getElementById('new-item-transport-fields').classList.add('hidden');
-            
-            toggleModal('modal-add-item');
-        }
-
-        function editItem(dayId, index) {
-            editingItemIndex = index;
-            const item = itineraryData[dayId].items[index];
-            
-            document.getElementById('modal-title').textContent = "編輯行程";
-            document.getElementById('btn-save-item').textContent = "儲存修改";
-            
-            document.getElementById('new-item-type').value = item.type;
-            
-            if (item.type === 'transport') {
-                document.getElementById('new-item-trans-desc').value = item.desc;
-                document.getElementById('new-item-fields').classList.add('hidden');
-                document.getElementById('new-item-transport-fields').classList.remove('hidden');
-            } else {
-                document.getElementById('new-item-time').value = item.time;
-                document.getElementById('new-item-title').value = item.title;
-                document.getElementById('new-item-desc').value = item.desc;
-                document.getElementById('new-item-query').value = item.mapQuery || '';
-                document.getElementById('new-item-note').value = item.note || '';
-                
-                document.getElementById('new-item-fields').classList.remove('hidden');
-                document.getElementById('new-item-transport-fields').classList.add('hidden');
-            }
-            
-            toggleModal('modal-add-item');
-        }
-
-        function saveNewItem() {
-            const type = document.getElementById('new-item-type').value;
-            let newItem = {};
-
-            if (type === 'transport') {
-                const desc = document.getElementById('new-item-trans-desc').value;
-                if(!desc) { alert('請輸入移動說明'); return; }
-                newItem = { type: 'transport', desc: desc };
-            } else {
-                const time = document.getElementById('new-item-time').value;
-                const title = document.getElementById('new-item-title').value;
-                const desc = document.getElementById('new-item-desc').value;
-                const query = document.getElementById('new-item-query').value;
-                const note = document.getElementById('new-item-note').value;
-                
-                if(!title) { alert('請輸入標題'); return; }
-                
-                newItem = {
-                    type: 'spot',
-                    time: time || '00:00',
-                    title: title,
-                    desc: desc,
-                    mapQuery: query,
-                    category: type,
-                    note: note
-                };
-            }
-
-            if (editingItemIndex > -1) {
-                // Update existing item
-                itineraryData[currentDayId].items[editingItemIndex] = newItem;
-            } else {
-                // Add new item
-                itineraryData[currentDayId].items.push(newItem);
-            }
-
-            // Auto Sort
-            sortItinerary(currentDayId);
-            
-            localStorage.setItem('nagoya_itinerary_data', JSON.stringify(itineraryData));
-            toggleModal('modal-add-item');
-            renderItinerary(currentDayId);
-        }
-
-        function sortItinerary(dayId) {
-            const items = itineraryData[dayId].items;
-            // Strategy: Assign a temp sort key. 
-            // If item has time, use it. If not (transport), use previous item's time to keep it attached.
-            let lastTime = "00:00";
-            
-            const itemsWithSortKey = items.map((item, index) => {
-                if (item.time) {
-                    lastTime = item.time;
-                    return { item, sortTime: item.time, originalIndex: index };
-                } else {
-                    // For transport without time, assume it happens immediately after previous item
-                    // We append a small suffix to ensure it stays after the main event
-                    return { item, sortTime: lastTime + "_99", originalIndex: index };
-                }
-            });
-
-            itemsWithSortKey.sort((a, b) => {
-                if (a.sortTime < b.sortTime) return -1;
-                if (a.sortTime > b.sortTime) return 1;
-                return a.originalIndex - b.originalIndex; // Stable sort fallback
-            });
-
-            itineraryData[dayId].items = itemsWithSortKey.map(x => x.item);
         }
 
         // ================= WALLET =================
@@ -994,8 +1003,6 @@
             document.getElementById('currency-symbol').textContent = select.value === 'JPY' ? '¥' : '$';
         }
 
-        let expensesData = JSON.parse(localStorage.getItem('nagoya_expenses_v2')) || { food:[], shopping:[], transport:[], accommodation:[], other:[] };
-
         function addExpense() {
             const desc = document.getElementById('expense-item').value.trim();
             const amount = parseFloat(document.getElementById('expense-amount').value);
@@ -1006,6 +1013,7 @@
 
             if(!desc || !amount) { alert('請輸入名稱與金額'); return; }
 
+            let expensesData = JSON.parse(localStorage.getItem('nagoya_expenses_v2')) || { food:[], shopping:[], transport:[], accommodation:[], other:[] };
             if (!expensesData[category]) expensesData[category] = [];
             expensesData[category].push({ desc, amount, currency, photo, isShared, date: new Date().toISOString() });
             localStorage.setItem('nagoya_expenses_v2', JSON.stringify(expensesData));
@@ -1023,6 +1031,7 @@
 
         function deleteExpense(catId, index) {
             if(confirm('刪除此筆？')) {
+                let expensesData = JSON.parse(localStorage.getItem('nagoya_expenses_v2'));
                 expensesData[catId].splice(index, 1);
                 localStorage.setItem('nagoya_expenses_v2', JSON.stringify(expensesData));
                 renderExpenses();
@@ -1030,6 +1039,7 @@
         }
 
         function renderExpenses() {
+            let expensesData = JSON.parse(localStorage.getItem('nagoya_expenses_v2')) || { food:[], shopping:[], transport:[], accommodation:[], other:[] };
             const container = document.getElementById('expenses-container');
             container.innerHTML = '';
             let totalTWD = 0, totalJPY = 0;
@@ -1132,13 +1142,12 @@
             }
         }
 
-        // ================= UTILS: BACKUP/RESTORE =================
+        // ================= UTILS =================
         function exportData() {
             const data = {
                 expenses: JSON.parse(localStorage.getItem('nagoya_expenses_v2')),
                 checklist: JSON.parse(localStorage.getItem('nagoya_checklist')),
-                notes: JSON.parse(localStorage.getItem('nagoya_itinerary_notes')),
-                itinerary: JSON.parse(localStorage.getItem('nagoya_itinerary_data')),
+                itinerary: itineraryData,
                 memo: localStorage.getItem('nagoya_memo'),
                 budget: localStorage.getItem('nagoya_budget')
             };
@@ -1161,11 +1170,11 @@
                     const data = JSON.parse(e.target.result);
                     if(data.expenses) localStorage.setItem('nagoya_expenses_v2', JSON.stringify(data.expenses));
                     if(data.checklist) localStorage.setItem('nagoya_checklist', JSON.stringify(data.checklist));
-                    if(data.notes) localStorage.setItem('nagoya_itinerary_notes', JSON.stringify(data.notes));
-                    if(data.itinerary) localStorage.setItem('nagoya_itinerary_data', JSON.stringify(data.itinerary));
+                    // Itinerary restore handled via Firebase manually if needed, or local override?
+                    // For now let's assume backup restores local prefs mostly.
                     if(data.memo) localStorage.setItem('nagoya_memo', data.memo);
                     if(data.budget) localStorage.setItem('nagoya_budget', data.budget);
-                    alert("資料匯入成功！網頁將重新整理。");
+                    alert("個人資料匯入成功！網頁將重新整理。");
                     location.reload();
                 } catch(err) {
                     alert("檔案格式錯誤");
@@ -1174,7 +1183,6 @@
             reader.readAsText(file);
         }
 
-        // ================= MODAL =================
         function toggleModal(id) {
             const m = document.getElementById(id);
             m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
@@ -1187,7 +1195,6 @@
             toggleModal('modal-trans');
         }
 
-        // Smart Status Logic
         function updateSmartStatus() {
             const now = new Date();
             const start = new Date('2026-03-02');
@@ -1238,6 +1245,10 @@
             }
         }
 
+        const memoArea = document.getElementById('memo-area');
+        memoArea.value = localStorage.getItem('nagoya_memo') || '';
+        memoArea.addEventListener('input', (e) => { localStorage.setItem('nagoya_memo', e.target.value); });
+
         async function fetchWeather() {
             try {
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.18&longitude=136.90&current_weather=true');
@@ -1255,7 +1266,6 @@
                 if (descEl) {
                     descEl.textContent = "無法取得";
                 }
-                console.error("Weather fetch failed", e);
             }
         }
 
@@ -1294,6 +1304,193 @@
             list.splice(index, 1); 
             localStorage.setItem('nagoya_checklist', JSON.stringify(list)); 
             renderChecklist(); 
+        }
+
+        function exportCSV() {
+            let expensesData = JSON.parse(localStorage.getItem('nagoya_expenses_v2')) || {};
+            let csv = '\uFEFFCategory,Description,Amount,Currency,Date\n';
+            Object.keys(expensesData).forEach(cat => {
+                expensesData[cat].forEach(item => {
+                    csv += `${cat},${item.desc},${item.amount},${item.currency},${item.date}\n`;
+                });
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "nagoya_expenses.csv";
+            link.click();
+        }
+
+    </script>
+
+    <!-- Firebase Logic Module -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+        import { getAuth, signInAnonymously, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Auth & Init
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+            
+            setupRealtimeListener();
+        };
+        initAuth();
+
+        const itineraryDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'itinerary', 'shared');
+
+        function setupRealtimeListener() {
+            onSnapshot(itineraryDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    // Update global data
+                    itineraryData = docSnap.data();
+                    renderItinerary(currentDayId);
+                } else {
+                    // Initialize if empty
+                    setDoc(itineraryDocRef, defaultItineraryData);
+                }
+            }, (error) => {
+                console.error("Firebase sync error:", error);
+            });
+        }
+
+        // --- Expose functions to Window for HTML Buttons ---
+
+        window.openAddItemModal = (dayId) => {
+            editingItemIndex = -1; 
+            document.getElementById('modal-title').textContent = "新增行程";
+            document.getElementById('btn-save-item').textContent = "新增";
+            
+            document.getElementById('new-item-type').value = 'spot';
+            document.getElementById('new-item-time').value = '';
+            document.getElementById('new-item-title').value = '';
+            document.getElementById('new-item-desc').value = '';
+            document.getElementById('new-item-query').value = '';
+            document.getElementById('new-item-note').value = '';
+            document.getElementById('new-item-trans-desc').value = '';
+            
+            document.getElementById('new-item-fields').classList.remove('hidden');
+            document.getElementById('new-item-transport-fields').classList.add('hidden');
+            
+            toggleModal('modal-add-item');
+        }
+
+        window.editItem = (dayId, index) => {
+            editingItemIndex = index;
+            const item = itineraryData[dayId].items[index];
+            
+            document.getElementById('modal-title').textContent = "編輯行程";
+            document.getElementById('btn-save-item').textContent = "儲存修改";
+            
+            document.getElementById('new-item-type').value = item.type;
+            
+            if (item.type === 'transport') {
+                document.getElementById('new-item-trans-desc').value = item.desc;
+                document.getElementById('new-item-fields').classList.add('hidden');
+                document.getElementById('new-item-transport-fields').classList.remove('hidden');
+            } else {
+                document.getElementById('new-item-time').value = item.time;
+                document.getElementById('new-item-title').value = item.title;
+                document.getElementById('new-item-desc').value = item.desc;
+                document.getElementById('new-item-query').value = item.mapQuery || '';
+                document.getElementById('new-item-note').value = item.note || '';
+                
+                document.getElementById('new-item-fields').classList.remove('hidden');
+                document.getElementById('new-item-transport-fields').classList.add('hidden');
+            }
+            
+            toggleModal('modal-add-item');
+        }
+
+        window.saveNewItem = async () => {
+            if (!auth.currentUser) return;
+
+            const type = document.getElementById('new-item-type').value;
+            let newItem = {};
+
+            if (type === 'transport') {
+                const desc = document.getElementById('new-item-trans-desc').value;
+                if(!desc) { alert('請輸入移動說明'); return; }
+                newItem = { type: 'transport', desc: desc };
+            } else {
+                const time = document.getElementById('new-item-time').value;
+                const title = document.getElementById('new-item-title').value;
+                const desc = document.getElementById('new-item-desc').value;
+                const query = document.getElementById('new-item-query').value;
+                const note = document.getElementById('new-item-note').value;
+                
+                if(!title) { alert('請輸入標題'); return; }
+                
+                newItem = {
+                    type: 'spot',
+                    time: time || '00:00',
+                    title: title,
+                    desc: desc,
+                    mapQuery: query,
+                    category: type,
+                    note: note
+                };
+            }
+
+            // Create a deep copy to modify
+            const newData = JSON.parse(JSON.stringify(itineraryData));
+
+            if (editingItemIndex > -1) {
+                newData[currentDayId].items[editingItemIndex] = newItem;
+            } else {
+                newData[currentDayId].items.push(newItem);
+            }
+
+            // Auto Sort Logic
+            const items = newData[currentDayId].items;
+            let lastTime = "00:00";
+            
+            const itemsWithSortKey = items.map((item, index) => {
+                if (item.time) {
+                    lastTime = item.time;
+                    return { item, sortTime: item.time, originalIndex: index };
+                } else {
+                    return { item, sortTime: lastTime + "_99", originalIndex: index };
+                }
+            });
+
+            itemsWithSortKey.sort((a, b) => {
+                if (a.sortTime < b.sortTime) return -1;
+                if (a.sortTime > b.sortTime) return 1;
+                return a.originalIndex - b.originalIndex;
+            });
+
+            newData[currentDayId].items = itemsWithSortKey.map(x => x.item);
+
+            // Save to Firestore
+            await setDoc(itineraryDocRef, newData);
+            toggleModal('modal-add-item');
+        }
+
+        window.deleteItineraryItem = async (dayId, index) => {
+            if(!auth.currentUser) return;
+            if(confirm('確定要刪除此行程嗎？(此操作會同步給所有人)')) {
+                const newData = JSON.parse(JSON.stringify(itineraryData));
+                newData[dayId].items.splice(index, 1);
+                await setDoc(itineraryDocRef, newData);
+            }
+        }
+
+        window.resetItinerary = async () => {
+            if(!auth.currentUser) return;
+            if(confirm("警告：確定要重置為預設行程嗎？所有人的變更都會消失！")) {
+                await setDoc(itineraryDocRef, defaultItineraryData);
+            }
         }
 
     </script>
