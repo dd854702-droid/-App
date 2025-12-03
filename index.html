@@ -25,7 +25,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- QRCode Lib (雖然此版本移除了QR功能，但保留庫引用以防擴充需求，若確定不用可移除) -->
+    <!-- QRCode Lib (保留庫引用以防擴充需求) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
@@ -119,12 +119,16 @@
         [data-theme="dark"] .bg-green-100 { background-color: #064e3b; color: #d1fae5; }
         [data-theme="dark"] .bg-pink-100 { background-color: #831843; color: #fce7f3; }
         [data-theme="dark"] .bg-amber-100 { background-color: #78350f; color: #fef3c7; }
+        [data-theme="dark"] .bg-amber-50 { background-color: #451a03; color: #fef3c7; }
         [data-theme="dark"] .bg-purple-100 { background-color: #4c1d95; color: #e9d5ff; }
         [data-theme="dark"] .bg-orange-100 { background-color: #7c2d12; color: #ffedd5; }
+        [data-theme="dark"] .bg-gray-700 { background-color: #3f3f46; }
         [data-theme="dark"] .text-gray-500, [data-theme="dark"] .text-gray-600 { color: #a1a1aa; }
         [data-theme="dark"] .text-gray-400 { color: #71717a; }
         [data-theme="dark"] .text-blue-800, [data-theme="dark"] .text-blue-600 { color: #bfdbfe; }
         [data-theme="dark"] .text-red-600, [data-theme="dark"] .text-red-500 { color: #fca5a5; }
+        [data-theme="dark"] .text-amber-800 { color: #fcd34d; }
+        [data-theme="dark"] .text-amber-600 { color: #fbbf24; }
         [data-theme="dark"] .border-gray-300 { border-color: #52525b; }
         [data-theme="dark"] .bg-gray-800 { background-color: #18181b; border-color: #52525b; }
 
@@ -176,22 +180,19 @@
         }
         @keyframes drawLine { to { stroke-dashoffset: 0; } }
 
-        /* 地圖標籤優化 (Map Text Optimization) 
-           使用 paint-order 和 stroke 來創造文字白邊效果 (Halo Effect)
-           確保文字在地圖線條上方清晰可讀
-        */
+        /* 地圖標籤優化 */
         .station-label {
             font-family: 'Zen Maru Gothic', sans-serif;
             font-weight: 900;
             font-size: 11px;
             fill: var(--ink-color);
             paint-order: stroke fill;
-            stroke: var(--card-bg); /* 使用卡片背景色作為文字邊框 */
+            stroke: var(--card-bg);
             stroke-width: 4px;
             stroke-linecap: round;
             stroke-linejoin: round;
             text-anchor: middle;
-            pointer-events: none; /* 避免文字遮擋點擊 */
+            pointer-events: none;
         }
         [data-theme="dark"] .station-label {
             fill: #fff;
@@ -742,36 +743,52 @@
                 </svg></div></div>`;
             } else if (dayId === 'day2') {
                 html = `<div id="day2-detail" class="day-detail"><h3 class="font-black text-xl mb-4 border-l-4 border-pink-400 pl-3">犬山城古都遊</h3><div class="relative pl-2"><div class="timeline-line"></div>
+                
+                <!-- 07:30 出發 -->
                 <div class="relative flex items-start mb-6" id="card-d2-0"><div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><span class="font-bold text-xs">07:30</span></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-0')"><i class="fas fa-edit"></i></div><h4 class="font-bold">住宿地出發</h4><p class="text-xs text-gray-500">Trip & Sleep Hostel</p><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
                 <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 移動約 20分</div></div>
+                
+                <!-- 08:00 早餐 -->
                 <div class="relative flex items-start mb-6" id="card-d2-1"><div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><span class="font-bold text-xs">08:00</span></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-1')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>08:00</span><h4 class="font-bold">Bucyo Coffee</h4><p class="text-xs text-gray-500">小倉紅豆吐司</p><a href="https://www.google.com/maps/search/?api=1&query=Bucyo+Coffee+KAKO" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
                 <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 移動約 45分</div></div>
-                <div class="relative flex items-start mb-6" id="card-d2-2"><div class="bg-pink-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-chess-rook text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-2')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>10:00</span><h4 class="font-bold">犬山城</h4><p class="text-xs text-gray-500">國寶天守閣、城下町散策</p><div class="text-[10px] text-blue-600 font-bold mt-1"><i class="fas fa-ticket-alt mr-1"></i>門票: ¥550</div><a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
+                
+                <!-- 10:00 犬山城 -->
+                <div class="relative flex items-start mb-6" id="card-d2-2"><div class="bg-pink-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-chess-rook text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-2')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>10:00</span><h4 class="font-bold">犬山城</h4><p class="text-xs text-gray-500">國寶天守閣</p><div class="text-[10px] text-blue-600 font-bold mt-1"><i class="fas fa-ticket-alt mr-1"></i>門票: ¥550</div><a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
                 <div class="relative flex items-start mb-6"><div class="timeline-travel">🚶 散步</div></div>
+                
+                <!-- 12:30 午餐 -->
                 <div class="relative flex items-start mb-6" id="card-d2-lunch"><div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><span class="font-bold text-xs">12:30</span></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-lunch')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>12:30</span><h4 class="font-bold">Sakura Chaya</h4><p class="text-xs text-gray-500">田樂烤豆腐串</p><a href="https://www.google.com/maps/search/?api=1&query=Sakura+Chaya+Inuyama" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
-                <div class="relative flex items-start mb-6"><div class="timeline-travel">🚶 散步</div></div>
-                <div class="relative flex items-start mb-6" id="card-d2-walk"><div class="bg-pink-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-camera text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-walk')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>14:00</span><h4 class="font-bold">城下町散策</h4><p class="text-xs text-gray-500">戀愛神社、飛驒牛壽司</p><a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle+Town" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
-                <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 移動約 1時15分</div></div>
-                <div class="relative flex items-start mb-6" id="card-d2-6"><div class="bg-amber-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-coffee text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-6')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>16:30</span><h4 class="font-bold">GOLPIE COFFEE</h4><p class="text-xs text-gray-500">川名山冠軍咖啡</p><a href="https://www.google.com/maps/search/?api=1&query=GOLPIE+COFFEE" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
-                <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 移動約 30分</div></div>
-                <div class="relative flex items-start mb-6" id="card-d2-7"><div class="bg-gray-800 text-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-beer text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-7')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-700 text-gray-300 px-1.5 py-0.5 rounded mb-1 inline-block"><i class="far fa-clock mr-1"></i>18:30</span><h4 class="font-bold">世界的山將</h4><p class="text-xs text-gray-500">夢幻手羽先</p><a href="https://www.google.com/maps/search/?api=1&query=Sekai+no+Yamachan" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div></div>
+                
+                <!-- 移動 -->
+                <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 13:30 出發 (車程約1.5hr)</div></div>
+
+                <!-- 15:00 GOLPIE (重點行程) -->
+                <div class="relative flex items-start mb-6" id="card-d2-6"><div class="bg-amber-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-coffee text-xs"></i></div><div class="sketch-card p-3 flex-1 border-l-4 border-black relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-6')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-amber-50 text-amber-800 px-1.5 py-0.5 rounded mb-1 inline-block"><i class="far fa-clock mr-1"></i>15:00 - 17:00</span><h4 class="font-bold">GOLPIE COFFEE</h4><p class="text-xs text-gray-500">川名山冠軍咖啡 (17:00 Close)</p><p class="text-[10px] text-amber-600 mt-1">💡 務必於 17:00 前品鑑完畢</p><a href="https://www.google.com/maps/search/?api=1&query=GOLPIE+COFFEE" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div>
+                <div class="relative flex items-start mb-6"><div class="timeline-travel">🚃 移動回大須約 30分</div></div>
+                
+                <!-- 18:00 晚餐 (Solo Pizza) -->
+                <div class="relative flex items-start mb-6" id="card-d2-7"><div class="bg-red-100 border-2 border-black w-8 h-8 rounded-full flex items-center justify-center z-10 mr-3 flex-shrink-0"><i class="fas fa-pizza-slice text-xs"></i></div><div class="sketch-card p-3 flex-1 relative"><div class="absolute top-2 right-2 text-gray-300 cursor-pointer" onclick="editNote('card-d2-7')"><i class="fas fa-edit"></i></div><span class="text-[10px] font-bold bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 mb-1 inline-block"><i class="far fa-clock mr-1"></i>18:00</span><h4 class="font-bold">Solo Pizza Napoletana</h4><p class="text-xs text-gray-500">大須本店 (世界冠軍披薩)</p><a href="https://www.google.com/maps/search/?api=1&query=Solo+Pizza+Napoletana+Osu" target="_blank" class="inline-block text-[10px] bg-white px-2 py-1 rounded border border-gray-300 mt-2 hover:bg-gray-50 text-gray-600"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>開啟 Google Maps</a><div class="note-area mt-2 text-xs text-blue-600 font-bold hidden"></div></div></div></div>
+                
+                <!-- 地圖區塊 (SVG) -->
                 <div class="map-container"><h4 class="absolute top-2 left-3 font-bold text-[10px] bg-white px-2 py-1 border border-black rounded z-10">Day 2 Route</h4>
                 <svg viewBox="0 0 350 400" class="w-full h-full">
                     <!-- River Context -->
                     <path d="M 100 0 Q 80 200 120 400" fill="none" stroke="#e0f2fe" stroke-width="20"/>
                     
-                    <!-- Path: Hostel(Osu) -> Stn(Bucyo) -> Inuyama -> Golpie(SouthEast) -->
+                    <!-- Path: Hostel(Osu) -> Stn(Bucyo) -> Inuyama -> Golpie(SouthEast) -> Osu(Dinner) -->
                     <!-- Hostel (180, 300) -> Stn (80, 250) -->
                     <path d="M 180 300 Q 130 300 80 250" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="8,5" class="path-line" marker-end="url(#arrow-pink)" />
                     <!-- Stn (80, 250) -> Inuyama (180, 50) -->
                     <path d="M 80 250 Q 80 150 180 50" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="8,5" class="path-line" marker-end="url(#arrow-pink)" />
                     <!-- Inuyama (180, 50) -> Golpie (300, 300) -->
                     <path d="M 180 50 Q 300 150 300 300" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="8,5" class="path-line" marker-end="url(#arrow-pink)" />
-                    
+                    <!-- Golpie (300, 300) -> Osu/Dinner (180, 300) -->
+                     <path d="M 300 300 Q 250 350 180 300" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="8,5" class="path-line" marker-end="url(#arrow-pink)" />
+
                     <!-- Nodes & Concrete Names -->
-                    <!-- Hostel -->
-                    <circle cx="180" cy="300" r="8" fill="#a78bfa" stroke="white" stroke-width="2"/>
-                    <text x="180" y="325" class="station-label">🏠 住宿地</text>
+                    <!-- Hostel & Solo Pizza (Osu Area) -->
+                    <circle cx="180" cy="300" r="10" fill="#ef4444" stroke="white" stroke-width="2"/>
+                    <text x="180" y="325" class="station-label">🏠/🍕 大須(Solo Pizza)</text>
 
                     <!-- Nagoya Stn -->
                     <circle cx="80" cy="250" r="6" fill="#1a1a1a" stroke="white" stroke-width="2"/>
@@ -783,12 +800,9 @@
                     <text x="150" y="55" font-size="20">🏯</text>
 
                     <!-- Golpie (South East) -->
-                    <circle cx="300" cy="300" r="6" fill="#f59e0b" stroke="white" stroke-width="2"/>
-                    <text x="300" y="325" class="station-label">Golpie Coffee</text>
-                    <text x="310" y="295" font-size="16">☕</text>
-
-                    <!-- Distance Indicator -->
-                    <text x="100" y="160" font-size="10" fill="#9ca3af" transform="rotate(-30 100 160)" font-weight="bold" stroke="white" stroke-width="2" paint-order="stroke">約 45 分鐘車程</text>
+                    <circle cx="300" cy="300" r="8" fill="#f59e0b" stroke="white" stroke-width="2"/>
+                    <text x="300" y="330" class="station-label">Golpie Coffee</text>
+                    <text x="300" y="305" font-size="10" fill="white" text-anchor="middle" font-weight="bold">15:00</text>
 
                 </svg></div></div>`;
             } else {
