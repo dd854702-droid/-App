@@ -256,7 +256,7 @@
                     <span>名古屋</span>
                     <span class="text-xs bg-black text-white px-2 py-1 rounded rotate-3 inline-block">2026</span>
                 </h1>
-                <p id="smart-status" class="text-[10px] font-bold text-blue-500 mt-0.5 animate-pulse">連線中...</p>
+                <p id="smart-status" class="text-[10px] font-bold text-blue-500 mt-0.5 animate-pulse">準備出發！</p>
             </div>
             <div class="flex gap-3">
                 <div id="page-title-icon" class="w-10 h-10 border-2 border-black rounded-full flex items-center justify-center bg-yellow-400 text-black shadow-[2px_2px_0_0_#000]">
@@ -341,7 +341,7 @@
             <div id="day-content">
                 <div class="text-center py-10 text-gray-400">
                     <i class="fas fa-circle-notch fa-spin text-2xl mb-2"></i>
-                    <p class="text-xs">正在同步即時行程...</p>
+                    <p class="text-xs">正在載入行程...</p>
                 </div>
             </div>
         </div>
@@ -767,6 +767,16 @@
         let currentDayId = 'day1';
         let itineraryData = {};
         let editingItemIndex = -1; // Track which item is being edited
+
+        // Try to load from local storage immediately for fast render
+        try {
+            const cachedData = localStorage.getItem('nagoya_itinerary_data');
+            if (cachedData) {
+                itineraryData = JSON.parse(cachedData);
+            }
+        } catch (e) {
+            console.error("Error loading cached itinerary:", e);
+        }
 
         const expenseCategories = [
             { id: 'food', name: '飲食', icon: 'fa-utensils', color: 'bg-orange-50', chartColor: '#fdba74' },
@@ -1354,7 +1364,16 @@
                 if (docSnap.exists()) {
                     // Update global data
                     itineraryData = docSnap.data();
+                    // Save to local storage for next time (Cache)
+                    localStorage.setItem('nagoya_itinerary_data', JSON.stringify(itineraryData));
+                    // Update UI
                     renderItinerary(currentDayId);
+                    
+                    // Update Status text
+                    const statusEl = document.getElementById('smart-status');
+                    if(statusEl && statusEl.textContent === '連線中...') {
+                         updateSmartStatus(); // Restore normal status
+                    }
                 } else {
                     // Initialize if empty
                     setDoc(itineraryDocRef, defaultItineraryData);
